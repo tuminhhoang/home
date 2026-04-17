@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minh Tu Hoang — PhD | Cybersecurity & Embedded Systems Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --bg2: #0f1629;
+    --bg3: #141d35;
+    --accent: #4fd1c5;
+    --accent2: #f6ad55;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --border: rgba(79,209,197,0.15);
+    --card: rgba(15,22,41,0.8);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,209,197,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,209,197,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── GLOW ORBS ── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb-1 { width: 600px; height: 600px; background: rgba(79,209,197,0.06); top: -200px; right: -100px; }
+  .orb-2 { width: 500px; height: 500px; background: rgba(246,173,85,0.04); bottom: 200px; left: -150px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+
+  .nav-center {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-center a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .nav-center a:hover { color: var(--accent); }
+
+  .nav-socials {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .nav-social-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text3);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .nav-social-link:hover {
+    color: var(--accent);
+    border-color: var(--border);
+    background: rgba(79,209,197,0.05);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-top: 8rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .hero-left { }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.4s;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--text2);
+    font-style: italic;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.6s;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--text2);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.8s;
+    line-height: 1.8;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 1s;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    background: rgba(79,209,197,0.05);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 1.2s;
+  }
+
+  /* ── HERO RIGHT: PHOTO SLIDESHOW ── */
+  .hero-right {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.5s;
+    position: relative;
+  }
+
+  .slideshow {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--bg2);
+  }
+
+  .slideshow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(79,209,197,0.12);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+
+  .slide.active {
+    opacity: 1;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    image-rendering: auto;
+  }
+
+  .slide-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 3;
+  }
+
+  .slide-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    border: 1px solid rgba(79,209,197,0.4);
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .slide-dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+
+  /* decorative corner accent */
+  .slideshow-frame {
+    position: absolute;
+    top: 14px; left: 14px;
+    right: -14px; bottom: -14px;
+    border: 1px solid var(--accent);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text2);
+    border: 1px solid rgba(148,163,184,0.3);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--text);
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+
+  .about-text p {
+    color: var(--text2);
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat {
+    background: var(--bg2);
+    padding: 1.5rem;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-card {
+    background: var(--bg2);
+    padding: 2rem;
+    transition: background 0.2s;
+  }
+  .skill-card:hover { background: var(--bg3); }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(79,209,197,0.08);
+    border: 1px solid rgba(79,209,197,0.2);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline { position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    padding-left: 2.5rem;
+    padding-bottom: 3rem;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--accent);
+    background: var(--bg);
+    transform: rotate(45deg);
+  }
+
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-role {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 0.1rem;
+  }
+
+  .timeline-org {
+    font-size: 0.85rem;
+    color: var(--text3);
+    margin-bottom: 0.75rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  .timeline-desc li {
+    margin-bottom: 0.3rem;
+    list-style: none;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .timeline-desc li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+  .pub-item {
+    background: var(--bg2);
+    padding: 1.75rem 2rem;
+    transition: background 0.2s;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .pub-item:hover { background: var(--bg3); }
+
+  .pub-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    padding-top: 0.2rem;
+    letter-spacing: 0.05em;
+    min-width: 40px;
+  }
+
+  .pub-content { flex: 1; }
+
+  .pub-title {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+  }
+
+  .pub-venue {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+
+  .pub-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(79,209,197,0.25);
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.2s;
+    align-self: center;
+  }
+  .pub-item:hover .pub-link { opacity: 1; }
+  .pub-link:hover { background: rgba(79,209,197,0.1); }
+
+  /* ── PROJECTS ── */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--bg2);
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover { background: var(--bg3); }
+
+  .project-body {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-text p {
+    color: var(--text2);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .contact-link {
+    background: var(--bg2);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    color: var(--text);
+  }
+  .contact-link:hover { background: var(--bg3); }
+
+  .contact-link-icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .contact-link-info { flex: 1; }
+
+  .contact-link-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-link-value {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .contact-link-arrow {
+    color: var(--accent);
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+  }
+  .contact-link:hover .contact-link-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+  }
+
+  footer span { color: var(--accent); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    #hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      padding-top: 7rem;
+      padding-bottom: 3rem;
+    }
+    .hero-right { display: none; }
+    nav { padding: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .nav-socials { gap: 0.5rem; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    section { padding: 4rem 1.25rem; }
+  }
+
+  @media (max-width: 500px) {
+    .nav-center { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">MTH // ENG</a>
+  <ul class="nav-center">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-socials">
+    <a href="https://www.linkedin.com/in/minh-tu-hoang-uvic/" target="_blank" class="nav-social-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="nav-social-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+      Scholar
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">PhD · EE · Vancouver, Canada</div>
+    <h1 class="hero-name">Minh Tu <em>Hoang</em></h1>
+    <p class="hero-title">Cybersecurity Engineer &amp; Embedded Systems Researcher</p>
+    <p class="hero-desc">
+      PhD in Electrical Engineering with 8+ years building secure embedded systems and 5+ years developing enterprise cybersecurity products at Fortinet. IEEE-published researcher in AI-powered wireless localization and 5G network security.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">5G / GTP / SEPP</span>
+      <span class="tag">Linux Kernel</span>
+      <span class="tag">Embedded C/C++</span>
+      <span class="tag">Deep Learning</span>
+      <span class="tag">Fortinet NSE</span>
+      <span class="tag">SDR / DSP</span>
+      <span class="tag">Indoor Localization</span>
+      <span class="tag">ARM / FPGA</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">GET IN TOUCH</a>
+      <a href="#publications" class="btn btn-secondary">VIEW RESEARCH</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="slideshow" id="slideshow">
+      <div class="slide active">
+        <img src="photo/profile_photo.jpg" alt="Minh Tu Hoang">
+      </div>
+      <div class="slide">
+        <img src="photo/photo2.jpg" alt="Minh Tu Hoang">
+      </div>
+      <div class="slide">
+        <img src="photo/photo3.jpg" alt="Minh Tu Hoang">
+      </div>
+      <div class="slide-dots">
+        <div class="slide-dot active" data-index="0"></div>
+        <div class="slide-dot" data-index="1"></div>
+        <div class="slide-dot" data-index="2"></div>
+      </div>
+    </div>
+    <div class="slideshow-frame"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 &nbsp; About</div>
+  <h2 class="section-title reveal">Engineer.<br><em style="font-style:italic; color:var(--accent)">Researcher.</em> Builder.</h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        I hold a PhD in Electrical Engineering from the University of Victoria, where I developed novel deep learning architectures — including P-MIMO LSTM and CNN-LSTM networks — for WiFi indoor localization, achieving up to 50% performance improvement over existing methods.
+      </p>
+      <p>
+        At Fortinet, I work as a Staff Embedded Software Developer building enterprise security products including Fortigate, FortiSASE, GTP/SEPP for 5G networks, VoIP security, SSL VPN, antivirus, and IPS systems.
+      </p>
+      <p>
+        Prior to Fortinet, I implemented HF modems for tactical SDR radios at Viettel R&amp;D and worked as a Field Applications Engineer at Avnet Asia, specializing in Xilinx FPGA (Zynq SoC) deployments.
+      </p>
+    </div>
+    <div>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-num">PhD</div>
+          <div class="stat-label">Electrical Eng., UVic</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">7</div>
+          <div class="stat-label">IEEE / Nature Publications</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Yrs Embedded Systems</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Yrs Cybersecurity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 &nbsp; Skills</div>
+  <h2 class="section-title reveal">Technical<br>Expertise</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-title">Cybersecurity</div>
+      <div class="skill-items">
+        <span class="skill-pill">Fortinet NSE</span>
+        <span class="skill-pill">5G GTP/SEPP</span>
+        <span class="skill-pill">Firewall</span>
+        <span class="skill-pill">IPS/IDS</span>
+        <span class="skill-pill">SSL VPN</span>
+        <span class="skill-pill">Web Filter</span>
+        <span class="skill-pill">Antivirus</span>
+        <span class="skill-pill">FortiSASE</span>
+        <span class="skill-pill">VoIP/SIP</span>
+        <span class="skill-pill">IAM</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-title">Embedded Systems</div>
+      <div class="skill-items">
+        <span class="skill-pill">Linux Kernel</span>
+        <span class="skill-pill">ARM Cortex A8</span>
+        <span class="skill-pill">RTOS</span>
+        <span class="skill-pill">DSP TMS320</span>
+        <span class="skill-pill">MSP430</span>
+        <span class="skill-pill">ATmega</span>
+        <span class="skill-pill">Xilinx Zynq SoC</span>
+        <span class="skill-pill">FPGA</span>
+        <span class="skill-pill">Raspberry Pi</span>
+        <span class="skill-pill">Jetson TX2</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-title">AI / Machine Learning</div>
+      <div class="skill-items">
+        <span class="skill-pill">Deep Learning</span>
+        <span class="skill-pill">RNN / LSTM</span>
+        <span class="skill-pill">CNN</span>
+        <span class="skill-pill">TensorFlow</span>
+        <span class="skill-pill">Keras</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">MATLAB</span>
+        <span class="skill-pill">Indoor Localization</span>
+        <span class="skill-pill">Signal Classification</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📡</div>
+      <div class="skill-title">Wireless &amp; Communications</div>
+      <div class="skill-items">
+        <span class="skill-pill">WiFi / 802.11</span>
+        <span class="skill-pill">5G / LTE</span>
+        <span class="skill-pill">Bluetooth / UWB</span>
+        <span class="skill-pill">SDR</span>
+        <span class="skill-pill">HF Modems</span>
+        <span class="skill-pill">BPSK / Turbo</span>
+        <span class="skill-pill">MELP Vocoder</span>
+        <span class="skill-pill">MIL-STD-188</span>
+        <span class="skill-pill">OFDM</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">💻</div>
+      <div class="skill-title">Programming</div>
+      <div class="skill-items">
+        <span class="skill-pill">C</span>
+        <span class="skill-pill">C++</span>
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">MATLAB</span>
+        <span class="skill-pill">Linux / Bash</span>
+        <span class="skill-pill">Networking Stack</span>
+        <span class="skill-pill">TCP/IP</span>
+        <span class="skill-pill">Assembly</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔬</div>
+      <div class="skill-title">Research</div>
+      <div class="skill-items">
+        <span class="skill-pill">IEEE Journals</span>
+        <span class="skill-pill">Nature / Sci. Reports</span>
+        <span class="skill-pill">Autonomous Robotics</span>
+        <span class="skill-pill">Lab Experiments</span>
+        <span class="skill-pill">ML Teaching (ECE403)</span>
+        <span class="skill-pill">Grant Writing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 &nbsp; Experience</div>
+  <h2 class="section-title reveal">Career<br>Timeline</h2>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-date">SEP 2020 — PRESENT</div>
+      <div class="timeline-role">Staff Embedded Software Developer</div>
+      <div class="timeline-org">Fortinet Canada Inc. · Vancouver, BC</div>
+      <ul class="timeline-desc">
+        <li>Developed cybersecurity products: Fortigate, FortiSASE, FortiAnalyzer</li>
+        <li>Built GTP/SEPP security for 5G networks, SSL VPN, web filter, antivirus, IPS</li>
+        <li>Deep Linux kernel development for high-performance network security appliances</li>
+        <li>Fortinet Network Security Expert (NSE) specialist-level certification</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">SEP 2016 — AUG 2020</div>
+      <div class="timeline-role">Graduate Research Assistant</div>
+      <div class="timeline-org">Dr. Xiaodai Dong's Lab · University of Victoria, BC</div>
+      <ul class="timeline-desc">
+        <li>Proposed P-MIMO LSTM and CNN-LSTM architectures for WiFi indoor localization</li>
+        <li>Achieved up to 50% performance improvement over existing methods</li>
+        <li>Conducted autonomous experiments using self-navigation robot (RPi, Jetson TX2, ARM)</li>
+        <li>Published 4 IEEE journal papers and 2 arxiv preprints</li>
+        <li>Charles S. Humphrey Graduate Award for outstanding engineering student, 2019</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">SEP 2016 — AUG 2020</div>
+      <div class="timeline-role">Teaching Assistant — Machine Learning, Circuits, Digital Comms</div>
+      <div class="timeline-org">ECE Department · University of Victoria, BC</div>
+      <ul class="timeline-desc">
+        <li>Taught ML concepts for 400-level Machine Learning Course (ECE403)</li>
+        <li>Received Excellent Lab Teaching Assistant Award multiple semesters</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">MAR 2016 — SEP 2016</div>
+      <div class="timeline-role">Field Applications Engineer</div>
+      <div class="timeline-org">Avnet Asia · Singapore</div>
+      <ul class="timeline-desc">
+        <li>Full-cycle product design support for Xilinx integrated FPGA (Zynq SoC)</li>
+        <li>Customer-facing technical consulting across Southeast Asia</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">JUL 2013 — MAR 2016</div>
+      <div class="timeline-role">Digital Signal Processing Engineer</div>
+      <div class="timeline-org">Viettel R&amp;D · Hanoi, Vietnam</div>
+      <ul class="timeline-desc">
+        <li>Implemented HF modems for tactical SDR radios per MIL-STD-188-110C Appendix D</li>
+        <li>Created VHF waveform with Turbo code, MELP vocoder, and BPSK modulation</li>
+        <li>Recognized as top 1% technical employee among 2,000 staff (2015)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label">04 &nbsp; Research</div>
+  <h2 class="section-title reveal">Publications</h2>
+  <div class="pub-list reveal">
+    <div class="pub-item">
+      <div class="pub-year">2020</div>
+      <div class="pub-content">
+        <div class="pub-title">Semi-Sequential Probabilistic Model for Indoor Localization Enhancement</div>
+        <div class="pub-venue">IEEE SENSORS JOURNAL · Vol. 20, No. 11, pp. 6160–6169</div>
+      </div>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="pub-link">Scholar ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2021</div>
+      <div class="pub-content">
+        <div class="pub-title">Universal Activation Function for Machine Learning</div>
+        <div class="pub-venue">SCIENTIFIC REPORTS (NATURE) · Vol. 11, 18757</div>
+      </div>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="pub-link">Scholar ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2019</div>
+      <div class="pub-content">
+        <div class="pub-title">Recurrent Neural Networks for Accurate RSSI Indoor Localization</div>
+        <div class="pub-venue">IEEE INTERNET OF THINGS JOURNAL · Vol. 6, No. 6, pp. 10639–10651</div>
+      </div>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="pub-link">Scholar ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2018</div>
+      <div class="pub-content">
+        <div class="pub-title">A Soft Range Limited K-Nearest Neighbours Algorithm for Indoor Localization Enhancement</div>
+        <div class="pub-venue">IEEE SENSORS JOURNAL · Vol. 18, pp. 10208–10216</div>
+      </div>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="pub-link">Scholar ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2021</div>
+      <div class="pub-content">
+        <div class="pub-title">Passive Indoor Localization with WiFi Fingerprints</div>
+        <div class="pub-venue">ARXIV PREPRINT</div>
+      </div>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="pub-link">Scholar ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2020</div>
+      <div class="pub-content">
+        <div class="pub-title">A CNN-LSTM Quantifier for Single Access Point CSI Indoor Localization</div>
+        <div class="pub-venue">ARXIV PREPRINT</div>
+      </div>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="pub-link">Scholar ↗</a>
+    </div>
+    <div class="pub-item">
+      <div class="pub-year">2013</div>
+      <div class="pub-content">
+        <div class="pub-title">A Practical Synchronization Algorithm for IEEE 802.15.4a UWB Receivers</div>
+        <div class="pub-venue">ATC INTERNATIONAL CONFERENCE · Ho Chi Minh City, pp. 170–175</div>
+      </div>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="pub-link">Scholar ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">05 &nbsp; Projects</div>
+  <h2 class="section-title reveal">Key Projects</h2>
+  <div class="project-grid reveal">
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-num">PROJECT 01</div>
+        <div class="project-title">Autonomous WiFi Indoor Localization Robot</div>
+        <div class="project-desc">Self-navigation robot using Raspberry Pi, Jetson TX2, and ARM for autonomous WiFi fingerprint survey. Achieved up to 50% localization accuracy improvement using novel P-MIMO LSTM and CNN-LSTM networks.</div>
+        <div class="skill-items">
+          <span class="skill-pill">Python</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">ARM</span><span class="skill-pill">WiFi</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-num">PROJECT 02</div>
+        <div class="project-title">5G GTP/SEPP Security for FortiGate</div>
+        <div class="project-desc">Developed GTP and SEPP (Security Edge Protection Proxy) security features for Fortinet's enterprise firewall platform, protecting 5G core network interfaces from protocol-level attacks.</div>
+        <div class="skill-items">
+          <span class="skill-pill">C</span><span class="skill-pill">Linux Kernel</span><span class="skill-pill">5G</span><span class="skill-pill">Networking</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-num">PROJECT 03</div>
+        <div class="project-title">Tactical HF SDR Modem (MIL-STD-188-110C)</div>
+        <div class="project-desc">Implemented HF modulators-demodulators for tactical Software Defined Radio per US military standard MIL-STD-188-110C Appendix D at Viettel R&D for military communications systems.</div>
+        <div class="skill-items">
+          <span class="skill-pill">DSP</span><span class="skill-pill">SDR</span><span class="skill-pill">MATLAB</span><span class="skill-pill">C</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-num">PROJECT 04</div>
+        <div class="project-title">VHF Robust Waveform Design</div>
+        <div class="project-desc">Created a new VHF waveform combining Turbo error correction code, MELP vocoder for voice compression, and BPSK modulation for robust low-bandwidth military voice communications.</div>
+        <div class="skill-items">
+          <span class="skill-pill">Turbo Code</span><span class="skill-pill">MELP</span><span class="skill-pill">BPSK</span><span class="skill-pill">VHF</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-num">PROJECT 05</div>
+        <div class="project-title">Universal Activation Function (Nature)</div>
+        <div class="project-desc">Co-developed a universal activation function for neural networks published in Scientific Reports (Nature). The function generalizes across multiple ML tasks and architectures with improved convergence.</div>
+        <div class="skill-items">
+          <span class="skill-pill">Deep Learning</span><span class="skill-pill">Python</span><span class="skill-pill">Keras</span><span class="skill-pill">Research</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-body">
+        <div class="project-num">PROJECT 06</div>
+        <div class="project-title">Three-Wheel Self-Navigation Robot</div>
+        <div class="project-desc">Designed and built a three-wheel autonomous robot controller using Raspberry Pi, Jetson TX2, and ARM processors in C and Python for indoor localization data collection experiments.</div>
+        <div class="skill-items">
+          <span class="skill-pill">Robotics</span><span class="skill-pill">C</span><span class="skill-pill">Python</span><span class="skill-pill">Jetson TX2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">06 &nbsp; Contact</div>
+  <h2 class="section-title reveal">Let's Connect</h2>
+  <div class="contact-grid reveal">
+    <div class="contact-text">
+      <p>I'm open to senior R&amp;D engineering roles, research positions, and co-founding opportunities in cybersecurity, embedded AI, 5G security, and indoor localization.</p>
+      <p>If you're building something interesting at the intersection of wireless systems, security, and machine learning — I'd love to talk.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:hoangminhtu90@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉</span>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">hoangminhtu90@gmail.com</div>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="tel:+17786785868" class="contact-link">
+        <span class="contact-link-icon">✆</span>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Phone</div>
+          <div class="contact-link-value">(778) 678-5868</div>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/minh-tu-hoang-uvic/" target="_blank" class="contact-link">
+        <span class="contact-link-icon">in</span>
+        <div class="contact-link-info">
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">minh-tu-hoang-uvic</div>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://scholar.google.com/citations?user=WPNc30QAAAAJ&hl=en" target="_blank" class="contact-link">
+        <span class="contact-link-icon">◎</span>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Google Scholar</div>
+          <div class="contact-link-value">Minh Tu Hoang — Publications</div>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Minh Tu Hoang</span> &nbsp;·&nbsp; PhD, EE &nbsp;·&nbsp; Vancouver, Canada</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Photo slideshow
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.slide-dot');
+  let current = 0;
+
+  function goToSlide(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  // Click dots to jump
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => goToSlide(+dot.dataset.index));
+  });
+
+  // Auto-advance every 4 seconds
+  setInterval(() => goToSlide(current + 1), 4000);
+</script>
+
+</body>
+</html>
